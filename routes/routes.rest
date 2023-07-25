@@ -84,8 +84,8 @@ POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-    "username": "test hashed",
-    "password": "hashed"
+    "username": "admin",
+    "password": "admin"
 }
 
 ###
