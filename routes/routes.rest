@@ -1,0 +1,34 @@
+GET http://localhost:3000/employees
+
+###
+
+GET http://localhost:3000/employees/64bfb54cb50d94e9c7f37e8f
+
+###
+DELETE  http://localhost:3000/employees/64bfb736bd4cfe0f209e384b
+
+###
+
+POST http://localhost:3000/employees/
+Content-Type: application/json
+
+{
+    "firstName": "Hello",
+    "lastName": "McKenna",
+    "dob": "1991-12-05",
+    "email": "aenna91@hotmail.com",
+    "isActive": true
+}
+
+###
+
+PUT  http://localhost:3000/employees/64bfb54cb50d94e9c7f37e8f
+Content-Type: application/json
+
+{
+    "firstName": "Updated",
+    "lastName": "Updated",
+    "dob": "05/12/1991",
+    "email": "bmkenna91@hotmail.com",
+    "isActive": true
+}
