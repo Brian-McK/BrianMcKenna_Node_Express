@@ -15,7 +15,8 @@ app.use(express.json());
 const employeesRouter = require("./routes/employees");
 app.use("/employees", employeesRouter);
 
-// const skillLevelsRouter = require("./routes/skillLevels");
+const skillLevelsRouter = require("./routes/skillLevels");
+app.use("/skillLevels", skillLevelsRouter);
 
 // const usersRouter = require("./routes/users");
 

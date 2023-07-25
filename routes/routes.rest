@@ -1,3 +1,5 @@
+// EMPLOYEES
+
 GET http://localhost:3000/employees
 
 ###
@@ -23,7 +25,7 @@ PUT  http://localhost:3000/employees/64bfc702cf496eba218bdf2e
 Content-Type: application/json
 
 {
-    "firstName": "Brian",
+    "firstName": "zzzz",
     "lastName": "Updated",
     "dob": "05/12/1991",
     "email": "bmkenna91@hotmail.com",
@@ -32,3 +34,36 @@ Content-Type: application/json
 
 ###
 DELETE  http://localhost:3000/employees/64bfb54cb50d94e9c7f37e8f
+
+####################################################################
+
+// SKILL LEVEL
+
+GET http://localhost:3000/skillLevels
+
+###
+
+GET http://localhost:3000/skillLevels/64bfcdb0f8ca9e848af2a039
+
+###
+
+POST http://localhost:3000/skillLevels
+Content-Type: application/json
+
+{
+    "name": "test 2",
+    "description": "test 2"
+}
+
+###
+
+PUT  http://localhost:3000/skillLevels/64bfcdb0f8ca9e848af2a039
+Content-Type: application/json
+
+{
+    "name": "updated",
+    "description": "updated"
+}
+
+###
+DELETE  http://localhost:3000/skillLevels/64bfcdc5f8ca9e848af2a03d
