@@ -5,9 +5,6 @@ GET http://localhost:3000/employees
 GET http://localhost:3000/employees/64bfb54cb50d94e9c7f37e8f
 
 ###
-DELETE  http://localhost:3000/employees/64bfb736bd4cfe0f209e384b
-
-###
 
 POST http://localhost:3000/employees/
 Content-Type: application/json
@@ -22,13 +19,16 @@ Content-Type: application/json
 
 ###
 
-PUT  http://localhost:3000/employees/64bfb54cb50d94e9c7f37e8f
+PUT  http://localhost:3000/employees/64bfc702cf496eba218bdf2e
 Content-Type: application/json
 
 {
-    "firstName": "Updated",
+    "firstName": "Brian",
     "lastName": "Updated",
     "dob": "05/12/1991",
     "email": "bmkenna91@hotmail.com",
     "isActive": true
 }
+
+###
+DELETE  http://localhost:3000/employees/64bfb54cb50d94e9c7f37e8f
