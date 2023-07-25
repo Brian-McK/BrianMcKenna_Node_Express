@@ -84,19 +84,19 @@ POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-    "username": "test 3",
-    "passwordHashed": "test 3"
+    "username": "test hashed",
+    "password": "hashed"
 }
 
 ###
 
-PUT  http://localhost:3000/users/64bfd203b256346461dec8fc
+PUT  http://localhost:3000/users/64bfdbd5e33c20f2febfbdec
 Content-Type: application/json
 
 {
-    "username": "updated user",
+    "username": "worked",
     "passwordHashed": "updated user"
 }
 
 ###
-DELETE  http://localhost:3000/users/64bfd203b256346461dec8fc
+DELETE  http://localhost:3000/users/64bfdbd5e33c20f2febfbdec
