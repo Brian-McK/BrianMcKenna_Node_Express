@@ -18,6 +18,7 @@ app.use("/employees", employeesRouter);
 const skillLevelsRouter = require("./routes/skillLevels");
 app.use("/skillLevels", skillLevelsRouter);
 
-// const usersRouter = require("./routes/users");
+const usersRouter = require("./routes/users");
+app.use("/users", usersRouter);
 
 app.listen(3000, () => console.log("Server Started"));

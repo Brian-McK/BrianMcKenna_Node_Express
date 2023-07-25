@@ -67,3 +67,36 @@ Content-Type: application/json
 
 ###
 DELETE  http://localhost:3000/skillLevels/64bfcdc5f8ca9e848af2a03d
+
+####################################################################
+
+// USER
+
+GET http://localhost:3000/users
+
+###
+
+GET http://localhost:3000/users/64bfd1d6b256346461dec8f5
+
+###
+
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "username": "test 3",
+    "passwordHashed": "test 3"
+}
+
+###
+
+PUT  http://localhost:3000/users/64bfd203b256346461dec8fc
+Content-Type: application/json
+
+{
+    "username": "updated user",
+    "passwordHashed": "updated user"
+}
+
+###
+DELETE  http://localhost:3000/users/64bfd203b256346461dec8fc
