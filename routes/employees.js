@@ -1,7 +1,14 @@
 const express = require("express");
 const router = express.Router();
-const { getAllEmployees, getEmployeeById, createEmployee, updateEmployee, deleteEmployee } = require("../controllers/employeeController");
+const {
+  getAllEmployees,
+  getEmployeeById,
+  createEmployee,
+  updateEmployee,
+  deleteEmployee,
+} = require("../controllers/employeeController");
 const { getEmployee } = require("../middleware/employeeMiddleware");
+const { authenticateToken } = require("../validators/tokenValidators");
 
 // Get all employees
 router.get("/", getAllEmployees);

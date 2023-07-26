@@ -2,7 +2,7 @@ const User = require("../models/user");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const secretKeyJwtToken = process.env.JWT_Key;
-const secretKeyRefreshToken = process.env.JWT_Key;
+const secretKeyRefreshToken = process.env.REFRESH_KEY;
 
 exports.authenticateUser = async (req, res) => {
   const { username, password } = req.body;
@@ -39,6 +39,14 @@ exports.authenticateUser = async (req, res) => {
       }
     );
 
+    // assign refresh token to http only cookie
+
+    res.cookie("refreshToken", refreshToken, {
+      httpOnly: true,
+    });
+
+    // TODO - add refresh token to token reuse db
+
     res.json({
       message: "User authenticated successfully",
       authenticated: {
@@ -53,6 +61,32 @@ exports.authenticateUser = async (req, res) => {
 };
 
 exports.logoutUser = async (req, res) => {
-  res.cookie("cookieName", "", { expires: new Date(0) });
+  res.cookie("refreshToken", "", { expires: new Date(0) });
   res.json({ message: "HTTP-only cookie removed" });
+};
+
+exports.refreshToken = async (req, res) => {
+  const { username } = req.body;
+
+  try {
+    const cookieRefreshToken = req.cookies.refreshToken;
+
+    if (cookieRefreshToken == null) {
+      return res
+        .status(401)
+        .json({ message: "No refresh token, Unauthorized access" });
+    }
+
+    const findUser = await User.findOne({ username });
+
+    if (!findUser) {
+      return res.status(401).json({ message: "Unauthorized User" });
+    }
+
+    // TODO - token reuse detection - check token not been used
+
+    res.send(cookieRefreshToken);
+  } catch (error) {
+    res.json({ message: error.message });
+  }
 };

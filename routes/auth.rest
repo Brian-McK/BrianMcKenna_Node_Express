@@ -14,3 +14,12 @@ POST http://localhost:3000/auth/logout
 Content-Type: application/json
 
 ###
+
+POST http://localhost:3000/auth/refresh-token
+Content-Type: application/json
+
+{
+    "username": "admin"
+}
+
+###
