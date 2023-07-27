@@ -8,15 +8,11 @@ const {
   deleteEmployee,
 } = require("../controllers/employeeController");
 const { getEmployee } = require("../middleware/employeeMiddleware");
-const { authenticateToken } = require("../validators/tokenValidators");
 
-// Get all employees
 router.get("/", getAllEmployees);
 
-// Get one employee by ID
 router.get("/:id", getEmployee, getEmployeeById);
 
-// Create a new employee
 router.post("/", createEmployee);
 
 // Update an existing employee
