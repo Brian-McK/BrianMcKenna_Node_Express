@@ -1,4 +1,6 @@
 const Employee = require("../models/employee");
+const SkillLevel = require("../models/skillLevel");
+const mongoose = require("mongoose");
 
 // Get all employees
 exports.getAllEmployees = async (req, res) => {
@@ -17,8 +19,10 @@ exports.getEmployeeById = async (req, res) => {
 
 // Create a new employee
 exports.createEmployee = async (req, res) => {
+  debugger;
+
   try {
-    const { email } = req.body;
+    const { firstName, lastName, dob, email, isActive, skills } = req.body;
 
     const foundEmployeeByEmail = await Employee.findOne({ email });
 
@@ -26,13 +30,31 @@ exports.createEmployee = async (req, res) => {
       return res.status(409).json({ message: "User already exists" });
     }
 
+    for (const skillId of skills) {
+      if (!mongoose.Types.ObjectId.isValid(skillId)) {
+        return res
+          .status(400)
+          .json({ message: `Invalid skill ID format: ${skillId}` });
+      }
+    }
+
+    const existingSkills = await SkillLevel.find({ _id: { $in: skills } });
+
+    if (existingSkills.length !== skills.length) {
+      return res
+        .status(400)
+        .json({ message: "One or more skills do not exist" });
+    }
+
+    const skillObjectReferences = existingSkills.map((skill) => skill._id);
+
     const employee = new Employee({
-      firstName: req.body.firstName,
-      lastName: req.body.lastName,
-      dob: req.body.dob,
-      email: req.body.email,
-      isActive: req.body.isActive,
-      skills: [],
+      firstName,
+      lastName,
+      dob,
+      email,
+      isActive,
+      skillLevels: skillObjectReferences,
     });
 
     const newEmployee = await employee.save();

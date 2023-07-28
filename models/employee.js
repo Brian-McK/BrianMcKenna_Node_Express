@@ -28,16 +28,18 @@ const employeeSchema = new mongoose.Schema({
   age: {
     type: Number,
   },
-  skills: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "SkillLevel",
+  skillLevels: {
+    type: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "SkillLevel",
+      },
+    ],
+    CreatedAt: {
+      type: Date,
+      required: true,
+      default: Date.now(),
     },
-  ],
-  CreatedAt: {
-    type: Date,
-    required: true,
-    default: Date.now(),
   },
 });
 
