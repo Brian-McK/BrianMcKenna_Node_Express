@@ -48,9 +48,9 @@ Content-Type: application/json
     "firstName": "lol",
     "lastName": "lol",
     "dob": "1991-12-05",
-    "email": "123@hotmail.com",
+    "email": "18a3@hotmail.com",
     "isActive": true,
-    "skills": ["64c283a97d67f999e57a64ba"]
+    "skills": []
 }
 
 ###
