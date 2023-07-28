@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { calculateAge } = require("../middleware/employeeMiddleware");
 
 const employeeSchema = new mongoose.Schema({
   firstName: {
@@ -24,11 +25,22 @@ const employeeSchema = new mongoose.Schema({
     type: Boolean,
     required: true,
   },
+  age: {
+    type: Number,
+  },
+  skills: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "SkillLevel",
+    },
+  ],
   CreatedAt: {
     type: Date,
     required: true,
     default: Date.now(),
   },
 });
+
+employeeSchema.pre("save", calculateAge);
 
 module.exports = mongoose.model("Employee", employeeSchema);
