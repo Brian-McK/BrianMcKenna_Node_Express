@@ -31,6 +31,7 @@ exports.createEmployee = async (req, res) => {
 
     const skillObjectReferences = await validateSkills(skills);
 
+    
     const employee = new Employee({
       firstName,
       lastName,
@@ -43,16 +44,12 @@ exports.createEmployee = async (req, res) => {
     const newEmployee = await employee.save();
     res.status(201).json(newEmployee);
   } catch (error) {
-    res.json({ message: error.message });
+    res.json({ message: errorOutput(error) });
   }
 };
 
 // Update an existing employee
 exports.updateEmployee = async (req, res) => {
-  debugger;
-
-  console.log(this);
-
   try {
     const { firstName, lastName, dob, email, isActive, skills } = req.body;
 
@@ -98,3 +95,11 @@ exports.deleteEmployee = async (req, res) => {
     res.json({ message: error.message });
   }
 };
+
+function errorOutput(error) {
+  const messages = Object.values(error.message).map(
+    (property) => property.message
+  );
+
+  return messages.join(", ");
+}

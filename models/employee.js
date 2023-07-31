@@ -11,7 +11,6 @@ const employeeSchema = new mongoose.Schema(
     lastName: {
       type: String,
       required: [true, "Last name is required"],
-      minlength: [2, "Last name must be at least 2 characters long"],
       maxlength: [50, "Last name must not exceed 50 characters"],
     },
     dob: {

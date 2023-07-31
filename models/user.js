@@ -5,11 +5,11 @@ const userSchema = new mongoose.Schema(
     username: {
       type: String,
       unique: true,
-      required: [true, "Username is required"],
+      required: true,
     },
     passwordHashed: {
       type: String,
-      required: [true, "Password is required"],
+      required: true,
     },
   },
   { timestamps: true }

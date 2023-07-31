@@ -3,7 +3,7 @@ const SkillLevel = require("../models/skillLevel");
 exports.getAllSkillLevels = async (req, res) => {
   try {
     const skillLevels = await SkillLevel.find();
-    res.json(skillLevels);
+    res.status(200).json(skillLevels);
   } catch (error) {
     res.json({ message: error.message });
   }

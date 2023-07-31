@@ -46,9 +46,8 @@ Content-Type: application/json
 
 {
     "firstName": "loll",
-    "lastName": "oool",
-    "dob": "1991-12-05",
-    "email": "18a3aa@hotmail.com",
+    "dob": "2005-12-05",
+    "email": "18aa3aa@hotmail.com",
     "isActive": true,
     "skills": ["64c3db0180a00d2444455847"]
 }
@@ -135,19 +134,19 @@ Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
 {
-    "username": "admin",
+    "username": "adminwrgt4wag",
     "password": "admin"
 }
 
 ###
 
-PUT  http://localhost:3000/users/64bfdbd5e33c20f2febfbdec
+PUT  http://localhost:3000/users/64bfd1d6b256346461dec8f5
 Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
 {
-    "username": "worked",
-    "passwordHashed": "updated user"
+    "username": "a",
+    "password": "updated user"
 }
 
 ###
