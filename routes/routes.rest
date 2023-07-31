@@ -34,7 +34,7 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3000/employees/64bfc702cf496eba218bdf2e
+GET http://localhost:3000/employees/64c7d7173df26d7f9fd2c154
 Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
@@ -55,17 +55,17 @@ Content-Type: application/json
 
 ###
 
-PUT  http://localhost:3000/employees/64c790dc29a2838764380467
+PUT  http://localhost:3000/employees/64c7d7173df26d7f9fd2c154
 Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
 {
     "firstName": "qwqwqwqwqw",
     "lastName": "Updated",
-    "dob": "05/12/1992",
+    "dob": "1992-12-05",
     "email": "183@hotmail.com",
     "isActive": true,
-    "skillLevels": ["64c3db0180a00d244445584x"]
+    "skillLevels": []
 }
 
 ###

@@ -25,7 +25,7 @@ exports.createEmployee = async (req, res) => {
     const { error, value } = validateEmployee(req.body);
 
     if (error) {
-      return res.status(400).json({ message: error.details });
+      return res.status(400).json({ message: error.details[0].message });
     }
 
     const foundEmployeeByEmail = await Employee.findOne({
@@ -57,32 +57,36 @@ exports.createEmployee = async (req, res) => {
 // Update an existing employee
 exports.updateEmployee = async (req, res) => {
   try {
-    const { firstName, lastName, dob, email, isActive, skills } = req.body;
+    const { error, value } = validateEmployee(req.body);
+
+    if (error) {
+      return res.status(400).json({ message: error.details[0].message });
+    }
 
     const employeeToUpdate = res.employee;
 
-    if (firstName) {
-      employeeToUpdate.firstName = firstName;
+    if (value.firstName) {
+      employeeToUpdate.firstName = value.firstName;
     }
 
-    if (lastName) {
-      employeeToUpdate.lastName = lastName;
+    if (value.lastName) {
+      employeeToUpdate.lastName = value.lastName;
     }
 
-    if (dob) {
-      employeeToUpdate.dob = dob;
+    if (value.dob) {
+      employeeToUpdate.dob = value.dob;
     }
 
-    if (email) {
-      employeeToUpdate.email = email;
+    if (value.email) {
+      employeeToUpdate.email = value.email;
     }
 
-    if (isActive !== undefined) {
-      employeeToUpdate.isActive = isActive;
+    if (value.isActive !== undefined) {
+      employeeToUpdate.isActive = value.isActive;
     }
 
-    if (skills) {
-      employeeToUpdate.skillLevels = await validateSkills(skills);
+    if (value.skillLevels) {
+      employeeToUpdate.skillLevels = await validateSkills(value.skillLevels);
     }
 
     const updatedEmployee = await employeeToUpdate.save();
