@@ -17,16 +17,4 @@ async function getEmployee(req, res, next) {
   next();
 }
 
-async function calculateAge(next) {
-  const dob = this.dob;
-  if (dob) {
-    const birthDate = new Date(dob);
-    const ageDiff = Date.now() - birthDate.getTime();
-    const ageDate = new Date(ageDiff);
-    this.age = Math.abs(ageDate.getUTCFullYear() - 1970);
-  }
-
-  next();
-}
-
-module.exports = { getEmployee, calculateAge };
+module.exports = { getEmployee };

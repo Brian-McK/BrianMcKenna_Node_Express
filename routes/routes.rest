@@ -45,26 +45,27 @@ Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
 {
-    "firstName": "lol",
-    "lastName": "lol",
+    "firstName": "loll",
+    "lastName": "oool",
     "dob": "1991-12-05",
-    "email": "18a3@hotmail.com",
+    "email": "18a3aa@hotmail.com",
     "isActive": true,
-    "skills": []
+    "skills": ["64c3db0180a00d2444455847"]
 }
 
 ###
 
-PUT  http://localhost:3000/employees/64bfc702cf496eba218bdf2e
+PUT  http://localhost:3000/employees/64c790dc29a2838764380467
 Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
 {
     "firstName": "qwqwqwqwqw",
     "lastName": "Updated",
-    "dob": "05/12/1991",
-    "email": "bmkenna91@hotmail.com",
-    "isActive": true
+    "dob": "05/12/1992",
+    "email": "183@hotmail.com",
+    "isActive": true,
+    "skills": ["64c3db0180a00d244445584x"]
 }
 
 ###

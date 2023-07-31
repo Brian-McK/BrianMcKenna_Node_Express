@@ -20,7 +20,6 @@ exports.getEmployeeById = async (req, res) => {
 
 // Create a new employee
 exports.createEmployee = async (req, res) => {
-  debugger;
   try {
     const { firstName, lastName, dob, email, isActive, skills } = req.body;
 
@@ -50,11 +49,15 @@ exports.createEmployee = async (req, res) => {
 
 // Update an existing employee
 exports.updateEmployee = async (req, res) => {
+  debugger;
+
+  console.log(this);
+
   try {
-    const { firstName, lastName, dob, email, isActive } = req.body;
+    const { firstName, lastName, dob, email, isActive, skills } = req.body;
+
     const employeeToUpdate = res.employee;
 
-    // Update the employee properties if they exist in the request body
     if (firstName) {
       employeeToUpdate.firstName = firstName;
     }
@@ -73,6 +76,10 @@ exports.updateEmployee = async (req, res) => {
 
     if (isActive !== undefined) {
       employeeToUpdate.isActive = isActive;
+    }
+
+    if (skills) {
+      employeeToUpdate.skillLevels = await validateSkills(skills);
     }
 
     const updatedEmployee = await employeeToUpdate.save();
