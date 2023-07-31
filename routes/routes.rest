@@ -83,7 +83,7 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3000/skillLevels/64bfcdb0f8ca9e848af2a039
+GET http://localhost:3000/skillLevels/64c3db0180a00d2444455847
 Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
@@ -94,7 +94,7 @@ Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
 {
-    "name": "test 2",
+    "name": "t",
     "description": "test 2"
 }
 
