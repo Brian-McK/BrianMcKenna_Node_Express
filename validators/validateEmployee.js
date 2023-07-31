@@ -1,9 +1,16 @@
-const Joi = require("joi");
+const JoiBase = require("joi");
+const JoiDate = require("@joi/date");
+const Joi = JoiBase.extend(JoiDate);
 
 const validateEmployee = (employee) => {
   const schema = Joi.object({
-    username: Joi.string().min(3).max(255).required(),
-    password: Joi.string().min(6).max(30).required(),
+    firstName: Joi.string().min(2).max(50).required(),
+    lastName: Joi.string().max(50).required(),
+    dob: Joi.date().less("now").format("YYYY-MM-DD").required(),
+    email: Joi.string().email().required(),
+    isActive: Joi.boolean().required(),
+    age: Joi.number(),
+    skillLevels: Joi.array().items(Joi.string().alphanum()),
   }).options({
     errors: {
       wrap: {

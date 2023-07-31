@@ -6,8 +6,8 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-    "username": "admin",
-    "password": "admin"
+    "username": "admin123",
+    "password": "admin123"
 }
 
 ###
@@ -46,10 +46,11 @@ Content-Type: application/json
 
 {
     "firstName": "loll",
-    "dob": "2005-12-05",
-    "email": "18aa3aa@hotmail.com",
+    "lastName": "loll",
+    "dob": "1991-12-05",
+    "email": "123a@hotmail.com",
     "isActive": true,
-    "skills": ["64c3db0180a00d2444455847"]
+    "skillLevels": ["64c3db0180a00d244445584a"]
 }
 
 ###
@@ -64,7 +65,7 @@ Content-Type: application/json
     "dob": "05/12/1992",
     "email": "183@hotmail.com",
     "isActive": true,
-    "skills": ["64c3db0180a00d244445584x"]
+    "skillLevels": ["64c3db0180a00d244445584x"]
 }
 
 ###
@@ -130,12 +131,11 @@ Content-Type: application/json
 ###
 
 POST http://localhost:3000/users
-Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
 {
-    "username": "adminwrgt4wag",
-    "password": "admin"
+    "username": "admin123",
+    "password": "admin123"
 }
 
 ###

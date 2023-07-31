@@ -4,45 +4,24 @@ const employeeSchema = new mongoose.Schema(
   {
     firstName: {
       type: String,
-      required: [true, "First name is required"],
-      minlength: [2, "First name must be at least 2 characters long"],
-      maxlength: [50, "First name must not exceed 50 characters"],
+      required: true,
     },
     lastName: {
       type: String,
-      required: [true, "Last name is required"],
-      maxlength: [50, "Last name must not exceed 50 characters"],
+      required: true,
     },
     dob: {
       type: Date,
-      required: [true, "Date of birth is required"],
-      validate: {
-        validator: function (value) {
-          const today = new Date();
-          const ageLimit = new Date(today);
-          ageLimit.setFullYear(today.getFullYear() - 18);
-
-          return value <= ageLimit;
-        },
-        message: "Must be at least 18 years old",
-      },
+      required: true,
     },
     email: {
       type: String,
-      required: [true, "Email is required"],
+      required: true,
       unique: true,
-      lowercase: true,
-      trim: true,
-      validate: {
-        validator: function (value) {
-          return /\S+@\S+\.\S+/.test(value);
-        },
-        message: "Please provide a valid email address",
-      },
     },
     isActive: {
       type: Boolean,
-      required: [true, "Active or not is required"],
+      required: true,
     },
     age: {
       type: Number,

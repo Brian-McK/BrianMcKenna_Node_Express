@@ -1,4 +1,5 @@
 const { validateSkills } = require("../validators/skillLevelValidators");
+const { validateEmployee } = require("../validators/validateEmployee");
 const Employee = require("../models/employee");
 const SkillLevel = require("../models/skillLevel");
 const mongoose = require("mongoose");
@@ -21,30 +22,35 @@ exports.getEmployeeById = async (req, res) => {
 // Create a new employee
 exports.createEmployee = async (req, res) => {
   try {
-    const { firstName, lastName, dob, email, isActive, skills } = req.body;
+    const { error, value } = validateEmployee(req.body);
 
-    const foundEmployeeByEmail = await Employee.findOne({ email });
+    if (error) {
+      return res.status(400).json({ message: error.details });
+    }
+
+    const foundEmployeeByEmail = await Employee.findOne({
+      email: value.email,
+    });
 
     if (foundEmployeeByEmail) {
       return res.status(409).json({ message: "User already exists" });
     }
 
-    const skillObjectReferences = await validateSkills(skills);
+    const skillObjectReferences = await validateSkills(value.skillLevels);
 
-    
     const employee = new Employee({
-      firstName,
-      lastName,
-      dob,
-      email,
-      isActive,
+      firstName: value.firstName,
+      lastName: value.lastName,
+      dob: value.dob,
+      email: value.email,
+      isActive: value.isActive,
       skillLevels: skillObjectReferences,
     });
 
     const newEmployee = await employee.save();
     res.status(201).json(newEmployee);
   } catch (error) {
-    res.json({ message: errorOutput(error) });
+    res.json({ message: error.message });
   }
 };
 
@@ -95,11 +101,3 @@ exports.deleteEmployee = async (req, res) => {
     res.json({ message: error.message });
   }
 };
-
-function errorOutput(error) {
-  const messages = Object.values(error.message).map(
-    (property) => property.message
-  );
-
-  return messages.join(", ");
-}
