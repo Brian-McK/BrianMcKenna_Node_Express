@@ -7,7 +7,7 @@ Content-Type: application/json
 
 {
     "username": "admin123",
-    "password": "admin123"
+    "password": "Admin123!"
 }
 
 ###
@@ -134,8 +134,8 @@ POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-    "username": "admin1",
-    "password": "admin123"
+    "username": "admin123",
+    "password": "Admin123!"
 }
 
 ###

@@ -3,12 +3,24 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const secretKeyJwtToken = process.env.JWT_Key;
 const secretKeyRefreshToken = process.env.REFRESH_KEY;
+const { validateUser } = require("../validators/validateUser");
 
 exports.authenticateUser = async (req, res) => {
-  const { username, password } = req.body;
-
   try {
-    const findUser = await User.findOne({ username });
+    const {
+      error,
+      value: { username, password },
+    } = validateUser(req.body);
+
+    if (!username || !password) {
+      return res.status(400).json({ message: "All fields required" });
+    }
+
+    if (error) {
+      return res.status(400).json({ message: error.details[0].message });
+    }
+
+    const findUser = await User.findOne({ username: username });
 
     if (!findUser) {
       return res.status(404).json({ message: "User not found" });
@@ -39,8 +51,6 @@ exports.authenticateUser = async (req, res) => {
       }
     );
 
-    // assign refresh token to http only cookie
-
     res.cookie("refreshToken", refreshToken, {
       httpOnly: true,
     });
@@ -56,7 +66,7 @@ exports.authenticateUser = async (req, res) => {
       },
     });
   } catch (error) {
-    res.json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
