@@ -10,7 +10,7 @@ exports.getAllEmployees = async (req, res) => {
     const employees = await Employee.find();
     res.status(200).json(employees);
   } catch (error) {
-    res.json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -50,7 +50,7 @@ exports.createEmployee = async (req, res) => {
     const newEmployee = await employee.save();
     res.status(201).json(newEmployee);
   } catch (error) {
-    res.json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -92,7 +92,7 @@ exports.updateEmployee = async (req, res) => {
     const updatedEmployee = await employeeToUpdate.save();
     res.status(200).json(updatedEmployee);
   } catch (error) {
-    res.json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -102,6 +102,6 @@ exports.deleteEmployee = async (req, res) => {
     await res.employee.deleteOne({ _id: req.params.id });
     res.status(200).json({ message: "Deleted employee" });
   } catch (error) {
-    res.json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };

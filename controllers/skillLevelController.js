@@ -1,11 +1,12 @@
 const SkillLevel = require("../models/skillLevel");
+const { validateSkillLevel } = require("../validators/validateSkillLevel");
 
 exports.getAllSkillLevels = async (req, res) => {
   try {
     const skillLevels = await SkillLevel.find();
     res.status(200).json(skillLevels);
   } catch (error) {
-    res.json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -24,7 +25,7 @@ exports.createSkillLevel = async (req, res) => {
     console.log(newSkillLevel);
     res.status(201).json(newSkillLevel);
   } catch (error) {
-    res.json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -53,6 +54,6 @@ exports.deleteSkillLevel = async (req, res) => {
     await res.skillLevel.deleteOne({ _id: req.params.id });
     res.json({ message: "Deleted skill level" });
   } catch (error) {
-    res.json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };

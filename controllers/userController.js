@@ -7,7 +7,7 @@ exports.getAllUsers = async (req, res) => {
     const users = await User.find();
     res.json(users);
   } catch (error) {
-    res.json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -46,7 +46,7 @@ exports.createUser = async (req, res) => {
     const newUser = await user.save();
     res.status(201).json(newUser);
   } catch (error) {
-    res.json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -75,7 +75,7 @@ exports.updateUser = async (req, res) => {
     const updatedUser = await userToUpdate.save();
     res.status(200).json(updatedUser);
   } catch (error) {
-    res.json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
 
@@ -84,6 +84,6 @@ exports.deleteUser = async (req, res) => {
     await res.user.deleteOne({ _id: req.params.id });
     res.json({ message: "Deleted user" });
   } catch (error) {
-    res.json({ message: error.message });
+    res.status(500).json({ message: error.message });
   }
 };
