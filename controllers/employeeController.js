@@ -22,28 +22,31 @@ exports.getEmployeeById = async (req, res) => {
 // Create a new employee
 exports.createEmployee = async (req, res) => {
   try {
-    const { error, value } = validateEmployee(req.body);
+    const {
+      error,
+      value: { firstName, lastName, dob, email, isActive, skillLevels },
+    } = validateEmployee(req.body);
 
     if (error) {
       return res.status(400).json({ message: error.details[0].message });
     }
 
     const foundEmployeeByEmail = await Employee.findOne({
-      email: value.email,
+      email: email,
     });
 
     if (foundEmployeeByEmail) {
       return res.status(409).json({ message: "User already exists" });
     }
 
-    const skillObjectReferences = await validateSkills(value.skillLevels);
+    const skillObjectReferences = await validateSkills(skillLevels);
 
     const employee = new Employee({
-      firstName: value.firstName,
-      lastName: value.lastName,
-      dob: value.dob,
-      email: value.email,
-      isActive: value.isActive,
+      firstName: firstName,
+      lastName: lastName,
+      dob: dob,
+      email: email,
+      isActive: isActive,
       skillLevels: skillObjectReferences,
     });
 

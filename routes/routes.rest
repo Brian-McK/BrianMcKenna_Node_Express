@@ -63,7 +63,7 @@ Content-Type: application/json
     "firstName": "qwqwqwqwqw",
     "lastName": "Updated",
     "dob": "1992-12-05",
-    "email": "1833@hotmail.com",
+    "email": "1833a@hotmail.com",
     "isActive": true,
     "skillLevels": []
 }
@@ -134,19 +134,19 @@ POST http://localhost:3000/users
 Content-Type: application/json
 
 {
-    "username": "admin123",
+    "username": "admin1",
     "password": "admin123"
 }
 
 ###
 
-PUT  http://localhost:3000/users/64bfd1d6b256346461dec8f5
+PUT  http://localhost:3000/users/64c8f606952ac274448f6e8e
 Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
 {
-    "username": "a",
-    "password": "updated user"
+    "username": "admin1",
+    "password": "updated"
 }
 
 ###
