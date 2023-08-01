@@ -48,14 +48,14 @@ Content-Type: application/json
     "firstName": "loll",
     "lastName": "loll",
     "dob": "1991-12-05",
-    "email": "123a@hotmail.com",
+    "email": "1833@hotmail.com",
     "isActive": true,
-    "skillLevels": ["64c3db0180a00d244445584a"]
+    "skillLevels": []
 }
 
 ###
 
-PUT  http://localhost:3000/employees/64c7d7173df26d7f9fd2c154
+PUT  http://localhost:3000/employees/64c8ed3753fe76841d2b2998
 Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
@@ -63,7 +63,7 @@ Content-Type: application/json
     "firstName": "qwqwqwqwqw",
     "lastName": "Updated",
     "dob": "1992-12-05",
-    "email": "183@hotmail.com",
+    "email": "1833@hotmail.com",
     "isActive": true,
     "skillLevels": []
 }
@@ -83,7 +83,7 @@ Content-Type: application/json
 
 ###
 
-GET http://localhost:3000/skillLevels/64c3db0180a00d2444455847
+GET http://localhost:3000/skillLevels/64c8e3fc78e47fb0c24d3430
 Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
@@ -94,19 +94,19 @@ Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
 {
-    "name": "t",
-    "description": "test 2"
+    "name": "TEST",
+    "description": "TEST"
 }
 
 ###
 
-PUT  http://localhost:3000/skillLevels/64bfcdb0f8ca9e848af2a039
+PUT  http://localhost:3000/skillLevels/64c8e7b7d4f0fda9090da467
 Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
 {
-    "name": "updated",
-    "description": "updated"
+    "name": "Communication",
+    "description": "taa"
 }
 
 ###
