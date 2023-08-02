@@ -63,4 +63,71 @@ describe("Employee Router", () => {
       expect(response.body).toEqual([mockEmployee.toJSON()]);
     });
   });
+
+  describe("GET /employees/:id", () => {
+    it("should return an employee when requested", async () => {
+      const response = await request
+        .get(`/employees/${mockEmployee.id}`)
+        .send({})
+        .expect(200);
+
+      expect(response.body).toBeDefined();
+      expect(response.body).toEqual(mockEmployee.toJSON());
+    });
+  });
+
+  describe("GET /employees/:id", () => {
+    it("should return bad request 400 when getting an employee with invalid id", async () => {
+      const response = await request
+        .get(`/employees/${"lol"}`)
+        .send({})
+        .expect(400);
+
+      expect(response.body.message).toEqual("Invalid employee ID");
+    });
+  });
+
+  describe("GET /employees/:id", () => {
+    it("should return bad request 404 when getting an employee with valid id format, but not a valid id (non-existing)", async () => {
+      const response = await request
+        .get(`/employees/${"64ca6ec95965e37b5871edc4"}`)
+        .send({})
+        .expect(404);
+
+      expect(response.body.message).toEqual("Can't find employee");
+    });
+  });
+
+  describe("DELETE /employees/:id", () => {
+    it("should return OK when employee deleted", async () => {
+      const response = await request
+        .delete(`/employees/${mockEmployee.id}`)
+        .send({})
+        .expect(200);
+
+      expect(response.body.message).toEqual("Deleted employee");
+    });
+  });
+
+  describe("DELETE /employees/:id", () => {
+    it("should return bad request 400 when employee deleted with invalid id", async () => {
+      const response = await request
+        .delete(`/employees/${"lol"}`)
+        .send({})
+        .expect(400);
+
+      expect(response.body.message).toEqual("Invalid employee ID");
+    });
+  });
+
+  describe("DELETE /employees/:id", () => {
+    it("should return bad request 404 when deleting an employee with valid id format, but not a valid id (non-existing)", async () => {
+      const response = await request
+        .delete(`/employees/${"64ca6ec95965e37b5871edc4"}`)
+        .send({})
+        .expect(404);
+
+      expect(response.body.message).toEqual("Can't find employee");
+    });
+  });
 });
