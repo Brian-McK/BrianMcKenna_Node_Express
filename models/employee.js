@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const extendSchema = require("mongoose-extend-schema");
 
 const employeeSchema = new mongoose.Schema(
   {
@@ -37,6 +38,19 @@ const employeeSchema = new mongoose.Schema(
   },
   { timestamps: true }
 );
+
+employeeSchema.set("toJSON", {
+  transform: function (doc, ret) {
+    delete ret.__v;
+    ret._id = ret._id.toString();
+    ret.dob = ret.dob.toString();
+    ret.createdAt = ret.createdAt.toString();
+    ret.updatedAt = ret.updatedAt.toString();
+    ret.skillLevels = ret.skillLevels.map((sk) => {
+      return sk._id.toString();
+    });
+  },
+});
 
 function calculateAge() {
   const dob = this.dob;
