@@ -45,27 +45,27 @@ Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
 {
-    "firstName": "loll",
-    "lastName": "loll",
+    "firstName": "Gerry 2",
+    "lastName": "Roger 2",
     "dob": "1991-12-05",
-    "email": "1833@hotmail.com",
+    "email": "123@hotmail.com",
     "isActive": true,
-    "skillLevels": []
+    "skillLevels": ["64ca17aa7c562a5d2f470431"]
 }
 
 ###
 
-PUT  http://localhost:3000/employees/64c8ed3753fe76841d2b2998
+PUT  http://localhost:3000/employees/64ca10d4cb304ef19ac9fb82
 Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
 {
-    "firstName": "qwqwqwqwqw",
-    "lastName": "Updated",
+    "firstName": "Brian",
+    "lastName": "McKenna",
     "dob": "1992-12-05",
-    "email": "1833a@hotmail.com",
+    "email": "18334@hotmail.com",
     "isActive": true,
-    "skillLevels": []
+    "skillLevels": ["64c92d9c78e47fb0c24d3488", "64c92d9c78e47fb0c24d3489"]
 }
 
 ###
@@ -100,7 +100,7 @@ Content-Type: application/json
 
 ###
 
-PUT  http://localhost:3000/skillLevels/64c8e7b7d4f0fda9090da467
+PUT  http://localhost:3000/skillLevels/64c8e3fc78e47fb0c24d3434
 Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
@@ -110,7 +110,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE  http://localhost:3000/skillLevels/64bfcdc5f8ca9e848af2a03d
+DELETE  http://localhost:3000/skillLevels/64c92d9c78e47fb0c24d3488
 Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
@@ -150,6 +150,6 @@ Content-Type: application/json
 }
 
 ###
-DELETE  http://localhost:3000/users/64bfdbd5e33c20f2febfbdec
+DELETE  http://localhost:3000/users/64c8e3fc78e47fb0c24d3432
 Authorization: Bearer {{authToken}}
 Content-Type: application/json

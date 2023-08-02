@@ -68,8 +68,6 @@ exports.updateUser = async (req, res) => {
 
     const userToUpdate = res.user;
 
-    debugger;
-
     if (username) {
       if (username !== userToUpdate.username) {
         const existingUserUsername = await User.findOne({ username: username });

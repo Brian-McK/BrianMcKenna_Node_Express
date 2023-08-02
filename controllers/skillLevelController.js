@@ -46,7 +46,6 @@ exports.createSkillLevel = async (req, res) => {
 };
 
 exports.updateSkillLevel = async (req, res) => {
-  debugger;
   try {
     const {
       error,
@@ -84,7 +83,7 @@ exports.updateSkillLevel = async (req, res) => {
 
 exports.deleteSkillLevel = async (req, res) => {
   try {
-    await res.skillLevel.deleteOne({ _id: req.params.id });
+    await SkillLevel.deleteOne({ _id: res.skillLevel.id });
     res.json({ message: "Deleted skill level" });
   } catch (error) {
     res.status(500).json({ message: error.message });
