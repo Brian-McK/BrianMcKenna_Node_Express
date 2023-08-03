@@ -15,6 +15,15 @@ const skillLevelSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
+skillLevelSchema.set("toJSON", {
+  transform: function (doc, ret) {
+    delete ret.__v;
+    ret._id = ret._id.toString();
+    ret.createdAt = ret.createdAt.toString();
+    ret.updatedAt = ret.updatedAt.toString();
+  },
+});
+
 // Pre-middleware to remove references to the deleted SkillLevel in Employee documents
 skillLevelSchema.pre(
   "deleteOne",
