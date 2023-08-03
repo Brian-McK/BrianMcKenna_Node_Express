@@ -18,6 +18,7 @@ let mockEmployee = {};
 
 describe("Employee Router", () => {
   let server;
+  let createdEmployeeId;
   beforeAll(async () => {
     try {
       await mongoose.connect("mongodb://127.0.0.1:27017/testDB", {
@@ -50,6 +51,13 @@ describe("Employee Router", () => {
     }
   });
 
+  afterEach(async () => {
+    if (createdEmployeeId) {
+      await Employee.findByIdAndDelete(createdEmployeeId).then(() =>
+        console.log(`deleted - ${createdEmployeeId}`)
+      );
+    }
+  });
   afterAll(async () => {
     await mongoose.connection.close();
     server.close();
@@ -125,6 +133,8 @@ describe("Employee Router", () => {
       expect(new Date(response.body.dob).toUTCString).toEqual(
         new Date(newEmployeeData.dob).toUTCString
       );
+
+      createdEmployeeId = response.body._id;
 
       // // Verify that the employee was actually added to the database
       const createdEmployee = await Employee.findById(response.body._id);
@@ -219,6 +229,135 @@ describe("Employee Router", () => {
 
       expect(response.body).toBeDefined();
       expect(response.body.message).toEqual("User already exists");
+    });
+  });
+
+  describe("PUT /employees/:id", () => {
+    it("should update an employee and return 200 with updated employee", async () => {
+      const updatedEmployeeData = {
+        firstName: "John",
+        lastName: "Doe",
+        dob: "1991-05-12",
+        email: "johnn.doe@example.com", // <--- updated value
+        isActive: true,
+        skillLevels: [],
+      };
+
+      const response = await request
+        .put(`/employees/${mockEmployee.id}`)
+        .send(updatedEmployeeData)
+        .expect(200);
+
+      // Verify the response contains the created employee data
+      expect(response.body).toBeDefined();
+      expect(response.body.firstName).toEqual(updatedEmployeeData.firstName);
+      expect(response.body.lastName).toEqual(updatedEmployeeData.lastName);
+      expect(response.body.email).toEqual(updatedEmployeeData.email);
+      expect(response.body.isActive).toEqual(updatedEmployeeData.isActive);
+      expect(response.body.skillLevels).toEqual(
+        updatedEmployeeData.skillLevels
+      );
+      expect(new Date(response.body.dob).toUTCString).toEqual(
+        new Date(updatedEmployeeData.dob).toUTCString
+      );
+
+      // // Verify that the employee was actually added to the database
+      const updatedEmployee = await Employee.findById(response.body._id);
+      expect(updatedEmployee).toBeDefined();
+      expect(updatedEmployee.firstName).toEqual(updatedEmployeeData.firstName);
+      expect(updatedEmployee.lastName).toEqual(updatedEmployeeData.lastName);
+      expect(updatedEmployee.email).toEqual(updatedEmployeeData.email);
+      expect(updatedEmployee.isActive).toEqual(updatedEmployeeData.isActive);
+      expect(updatedEmployee.skillLevels).toEqual(
+        updatedEmployeeData.skillLevels
+      );
+      expect(new Date(updatedEmployee.dob).toUTCString).toEqual(
+        new Date(updatedEmployeeData.dob).toUTCString
+      );
+    });
+  });
+
+  describe("PUT /employees/:id", () => {
+    it("should return 400 when invalid data is in payload - firstName", async () => {
+      const invalidEmployeeData = {
+        firstName: "J", // <--- Invalid
+        lastName: "Doe",
+        dob: "1991-05-12",
+        email: "john.doe@example.com",
+        isActive: true,
+        skillLevels: [],
+      };
+
+      const response = await request
+        .put(`/employees/${mockEmployee.id}`)
+        .send(invalidEmployeeData)
+        .expect(400);
+
+      expect(response.body).toBeDefined();
+      expect(response.body.message).toEqual(
+        "firstName length must be at least 2 characters long"
+      );
+
+      const nonExistentEmployee = await Employee.findById(response.body._id);
+      expect(nonExistentEmployee).toBeNull();
+    });
+  });
+
+  describe("POST /employees/:id", () => {
+    it("should return 500 when skill level doesnt exist", async () => {
+      const invalidEmployeeData = {
+        firstName: "Johnas",
+        lastName: "Doe",
+        dob: "1991-05-12",
+        email: "john.doae@example.com",
+        isActive: true,
+        skillLevels: ["64cb725bf584df718a37f6ee"], // <--- doesnt exist in skill levels collection
+      };
+
+      const response = await request
+        .put(`/employees/${mockEmployee.id}`)
+        .send(invalidEmployeeData)
+        .expect(500);
+
+      expect(response.body).toBeDefined();
+      expect(response.body.message).toEqual("One or more skills do not exist");
+
+      const nonExistentEmployee = await Employee.findById(response.body._id);
+      expect(nonExistentEmployee).toBeNull();
+    });
+  });
+
+  describe("POST /employees/:id", () => {
+    it("should return 409 when user already exists - email", async () => {
+      const firstRecord = {
+        firstName: "John",
+        lastName: "Doe",
+        dob: "1991-05-12",
+        email: "john.doe@example.com",
+        isActive: true,
+        skillLevels: [],
+      };
+
+      await request.post("/employees").send(firstRecord);
+
+      const secondRecord = {
+        firstName: "Johnas",
+        lastName: "Doe",
+        dob: "1991-05-12",
+        email: "john.doe@example.com", // <--- already exists
+        isActive: true,
+        skillLevels: [],
+      };
+
+      const response = await request
+        .put(`/employees/${mockEmployee.id}`)
+        .send(secondRecord)
+        .expect(409);
+
+      expect(response.body).toBeDefined();
+      expect(response.body.message).toEqual(
+        "Employee with this email already exists"
+      );
     });
   });
 

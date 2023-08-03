@@ -45,27 +45,27 @@ Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
 {
-    "firstName": "Johna",
+    "firstName": "Johnaaa",
     "lastName": "Doaaae",
     "dob": "1991-12-05",
-    "email": "john.doe@hotmail.com",
+    "email": "john.dae@hotmail.com",
     "isActive": true,
     "skillLevels": ["64cb725bf584df718a37f6ee"]
 }
 
 ###
 
-PUT  http://localhost:3000/employees/64ca10d4cb304ef19ac9fb82
+PUT  http://localhost:3000/employees/64ca17e9a4eef8664e9ba5e5
 Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
 {
-    "firstName": "Brian",
-    "lastName": "McKenna",
-    "dob": "1992-12-05",
-    "email": "18334@hotmail.com",
+    "firstName": "John",
+    "lastName": "Doe",
+    "dob": "1991-05-12",
+    "email": "john.doe@example.com",
     "isActive": true,
-    "skillLevels": ["64c92d9c78e47fb0c24d3488", "64c92d9c78e47fb0c24d3489"]
+    "skillLevels": []
 }
 
 ###
