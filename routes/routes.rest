@@ -45,12 +45,12 @@ Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
 {
-    "firstName": "Gerry 2",
-    "lastName": "Roger 2",
+    "firstName": "Johna",
+    "lastName": "Doaaae",
     "dob": "1991-12-05",
-    "email": "123@hotmail.com",
+    "email": "john.doe@hotmail.com",
     "isActive": true,
-    "skillLevels": ["64ca17aa7c562a5d2f470431"]
+    "skillLevels": ["64cb725bf584df718a37f6ee"]
 }
 
 ###
