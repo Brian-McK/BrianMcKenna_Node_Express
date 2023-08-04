@@ -303,7 +303,7 @@ describe("Employee Router", () => {
     });
   });
 
-  describe("POST /employees/:id", () => {
+  describe("PUT /employees/:id", () => {
     it("should return 500 when skill level doesnt exist", async () => {
       const invalidEmployeeData = {
         firstName: "Johnas",
@@ -327,7 +327,7 @@ describe("Employee Router", () => {
     });
   });
 
-  describe("POST /employees/:id", () => {
+  describe("PUT /employees/:id", () => {
     it("should return 409 when user already exists - email", async () => {
       const firstRecord = {
         firstName: "John",
