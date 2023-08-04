@@ -19,7 +19,6 @@ let mockUser = {};
 
 describe("Auth Router", () => {
   let server;
-  let createdSkillLevelId;
   beforeAll(async () => {
     try {
       await mongoose.connect("mongodb://127.0.0.1:27017/testDB", {

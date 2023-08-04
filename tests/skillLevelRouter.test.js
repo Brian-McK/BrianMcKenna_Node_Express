@@ -19,7 +19,6 @@ let mockSkillLevel = {};
 
 describe("SkillLevel Router", () => {
   let server;
-  let createdSkillLevelId;
   beforeAll(async () => {
     try {
       await mongoose.connect("mongodb://127.0.0.1:27017/testDB", {
@@ -44,12 +43,6 @@ describe("SkillLevel Router", () => {
       await mockSkillLevel.save();
     } catch (err) {
       console.error("Error connecting to test database:", err);
-    }
-  });
-
-  afterEach(async () => {
-    if (createdSkillLevelId) {
-      await SkillLevel.findByIdAndDelete(createdSkillLevelId);
     }
   });
   afterAll(async () => {
@@ -117,8 +110,6 @@ describe("SkillLevel Router", () => {
       expect(response.body).toBeDefined();
       expect(response.body.name).toEqual(newSkillLevelData.name);
       expect(response.body.description).toEqual(newSkillLevelData.description);
-
-      createdSkillLevelId = response.body._id;
 
       // // Verify that the skill level was actually added to the database
       const createdSkillLevel = await SkillLevel.findById(response.body._id);

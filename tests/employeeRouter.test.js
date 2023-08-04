@@ -18,7 +18,6 @@ let mockEmployee = {};
 
 describe("Employee Router", () => {
   let server;
-  let createdEmployeeId;
   beforeAll(async () => {
     try {
       await mongoose.connect("mongodb://127.0.0.1:27017/testDB", {
@@ -48,12 +47,6 @@ describe("Employee Router", () => {
       await mockEmployee.save();
     } catch (err) {
       console.error("Error connecting to test database:", err);
-    }
-  });
-
-  afterEach(async () => {
-    if (createdEmployeeId) {
-      await Employee.findByIdAndDelete(createdEmployeeId);
     }
   });
   afterAll(async () => {
@@ -131,8 +124,6 @@ describe("Employee Router", () => {
       expect(new Date(response.body.dob).toUTCString).toEqual(
         new Date(newEmployeeData.dob).toUTCString
       );
-
-      createdEmployeeId = response.body._id;
 
       // // Verify that the employee was actually added to the database
       const createdEmployee = await Employee.findById(response.body._id);
