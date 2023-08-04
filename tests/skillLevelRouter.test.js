@@ -49,9 +49,7 @@ describe("SkillLevel Router", () => {
 
   afterEach(async () => {
     if (createdSkillLevelId) {
-      await SkillLevel.findByIdAndDelete(createdSkillLevelId).then(() =>
-        console.log(`deleted - ${createdSkillLevelId}`)
-      );
+      await SkillLevel.findByIdAndDelete(createdSkillLevelId);
     }
   });
   afterAll(async () => {
@@ -203,6 +201,56 @@ describe("SkillLevel Router", () => {
       expect(updatedSkillLevel.name).toEqual(updatedSkillLevelData.name);
       expect(updatedSkillLevel.description).toEqual(
         updatedSkillLevelData.description
+      );
+    });
+  });
+
+  describe("PUT /skilllevels", () => {
+    it("should return 400 when invalid data is in payload - name", async () => {
+      const invalidSkillLevelData = {
+        name: "J", // <--- Invalid
+        description: "Doe",
+      };
+
+      const response = await request
+        .put(`/skilllevels/${mockSkillLevel.id}`)
+        .send(invalidSkillLevelData)
+        .expect(400);
+
+      expect(response.body).toBeDefined();
+      expect(response.body.message).toEqual(
+        "name length must be at least 3 characters long"
+      );
+
+      const nonExistentSkillLevel = await SkillLevel.findById(
+        response.body._id
+      );
+      expect(nonExistentSkillLevel).toBeNull();
+    });
+  });
+
+  describe("PUT /skilllevels", () => {
+    it("should return 409 when skill level already exists - name", async () => {
+      const firstRecord = {
+        name: "hello",
+        description: "hello",
+      };
+
+      await request.post("/skilllevels").send(firstRecord);
+
+      const secondRecord = {
+        name: "hello",
+        description: "hello 2",
+      };
+
+      const response = await request
+        .put(`/skilllevels/${mockSkillLevel.id}`)
+        .send(secondRecord)
+        .expect(409);
+
+      expect(response.body).toBeDefined();
+      expect(response.body.message).toEqual(
+        "Skill level with this name already exists"
       );
     });
   });

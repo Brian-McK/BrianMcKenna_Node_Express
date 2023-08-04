@@ -53,9 +53,7 @@ describe("Employee Router", () => {
 
   afterEach(async () => {
     if (createdEmployeeId) {
-      await Employee.findByIdAndDelete(createdEmployeeId).then(() =>
-        console.log(`deleted - ${createdEmployeeId}`)
-      );
+      await Employee.findByIdAndDelete(createdEmployeeId);
     }
   });
   afterAll(async () => {
