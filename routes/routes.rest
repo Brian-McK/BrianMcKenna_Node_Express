@@ -100,13 +100,14 @@ Content-Type: application/json
 
 ###
 
-PUT  http://localhost:3000/skillLevels/64c8e3fc78e47fb0c24d3434
+PUT  http://localhost:3000/skillLevels/64c92d9c78e47fb0c24d348b
 Authorization: Bearer {{authToken}}
 Content-Type: application/json
 
 {
     "name": "Communication",
-    "description": "taa"
+    "description": "taa",
+    
 }
 
 ###
