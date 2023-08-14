@@ -14,7 +14,13 @@ db.on("error", (error) => console.log(error));
 db.once("error", (error) => console.log("Connected to Database..."));
 
 app.use(express.json());
-app.use(cors());
+
+const corsOptions = {
+  origin: "http://localhost:4000",
+  credentials: true,
+};
+
+app.use(cors(corsOptions));
 app.use(cookieParser());
 
 const employeesRouter = require("./routes/employees");
